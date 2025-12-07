@@ -185,13 +185,17 @@ body {
 }
 
 .glorp-image {
-    width: 130%;
-    height: 130%;
+    width: 160%;
+    height: 160%;
     object-fit: contain;
-    transform: translateY(5%); /* optional: moves him slightly upward */
-    transition: transform 0.3s ease;
+    transform: translateY(5%) scale(1);
+    transition: all 0.3s ease-in-out;
     animation: pulse 4s ease-in-out infinite;
-    pointer-events: none;
+    cursor: pointer;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 

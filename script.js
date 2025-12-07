@@ -1,4 +1,56 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Glorp expressions with full paths
+    const glorpExpressions = [
+        'images/glorp.png',
+        'images/happyglorp.png',
+        'images/sadglorp.png'
+    ];
+
+    // Set up Glorp click handler
+    const glorpImage = document.querySelector('.glorp-image');
+    if (glorpImage) {
+        // Set initial image
+        glorpImage.src = glorpExpressions[0];
+        
+        glorpImage.addEventListener('click', function() {
+            // Add a quick fade out
+            this.style.opacity = '0.5';
+            this.style.transform = 'scale(0.95)';
+            
+            // Change the image after a short delay for better effect
+            setTimeout(() => {
+                const currentSrc = this.src.split('/').pop();
+                const currentPath = this.src.substring(0, this.src.lastIndexOf('/') + 1);
+                const currentFile = currentSrc.includes('?') ? currentSrc.split('?')[0] : currentSrc;
+                
+                // Find current index or default to 0
+                let currentIndex = 0;
+                for (let i = 0; i < glorpExpressions.length; i++) {
+                    if (glorpExpressions[i].includes(currentFile)) {
+                        currentIndex = i;
+                        break;
+                    }
+                }
+                
+                // Get next image (with wrap-around)
+                const nextIndex = (currentIndex + 1) % glorpExpressions.length;
+                
+                // Add timestamp to prevent caching issues
+                this.src = glorpExpressions[nextIndex] + '?t=' + new Date().getTime();
+                
+                // Fade back in with new image
+                this.style.opacity = '1';
+                this.style.transform = 'scale(1.05)';
+                
+                // Reset transform after animation
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+                
+            }, 100);
+        });
+    }
+
     // Navigation
     const navButtons = document.querySelectorAll('.nav-btn');
     const pages = document.querySelectorAll('.page');
