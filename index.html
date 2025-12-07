@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarScope - Explore the Solar System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Star background -->
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    <div class="nebula"></div>
+
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="nav">
+            <button class="nav-btn active" data-page="home">Home</button>
+            <button class="nav-btn" data-page="explore">Explore</button>
+            <button class="nav-btn" data-page="about">About</button>
+        </nav>
+
+        <!-- Home Page -->
+        <section id="home" class="page active">
+            <div class="home-content">
+                <div class="alien-cat">
+                    <img src="glorp.png" alt="Glorp the Alien Cat" class="glorp-image">
+                </div>
+                <div class="main-content">
+                    <h1 class="logo">SolarScope</h1>
+                    <p class="subtitle">Your interactive journey through the solar system starts here.</p>
+                    <div class="glorp-message">
+                        <h2>Hello, human! I'm <span class="glorp-name">Glorp</span>!</h2>
+                        <p>Let's begin our cosmic adventure!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Explore Page -->
+        <section id="explore" class="page">
+            <h1 class="explore-logo">SolarScope</h1>
+            
+            <div class="explore-container">
+                <!-- Left Menu -->
+                <div class="side-menu">
+                    <div class="menu-section">
+                        <h3>STAR</h3>
+                        <button class="menu-item active" data-object="sun">Sun</button>
+                    </div>
+                    
+                    <div class="menu-section">
+                        <h3>PLANETS</h3>
+                        <button class="menu-item" data-object="mercury">Mercury</button>
+                        <button class="menu-item" data-object="venus">Venus</button>
+                        <button class="menu-item" data-object="earth">Earth</button>
+                        <button class="menu-item" data-object="mars">Mars</button>
+                        <button class="menu-item" data-object="jupiter">Jupiter</button>
+                        <button class="menu-item" data-object="saturn">Saturn</button>
+                        <button class="menu-item" data-object="uranus">Uranus</button>
+                        <button class="menu-item" data-object="neptune">Neptune</button>
+                    </div>
+                    
+                    <div class="menu-section">
+                        <h3>OTHERS</h3>
+                        <button class="menu-item" data-object="moons">Moons</button>
+                        <button class="menu-item" data-object="asteroids">Asteroids</button>
+                        <button class="menu-item" data-object="meteoroids">Meteoroids & Comets</button>
+                    </div>
+                </div>
+
+                <!-- Center - Planet Display -->
+                <div class="planet-display">
+                    <div class="planet-image" id="planet-image">
+                        [Sun Image Here]
+                    </div>
+                    <h2 class="planet-name" id="planet-name">Sun</h2>
+                </div>
+
+                <!-- Right - Facts -->
+                <div class="facts-panel">
+                    <div class="facts-content">
+                        <p id="planet-facts">The Sun is a massive ball of hot plasma, containing 99.86% of the solar system's mass. It's about 4.6 billion years old and converts 600 million tons of hydrogen into helium every second through nuclear fusion.</p>
+                    </div>
+
+                    <div class="fun-fact">
+                        <h3>Fun fact from Glorp</h3>
+                        <p id="fun-fact">The Sun is so big that about 1.3 million Earths could fit inside it! And its light takes 8 minutes and 20 seconds to reach Earth. That means when you look at the Sun (don't actually look directly at it!), you're seeing it as it was 8 minutes ago!</p>
+                    </div>
+
+                    <div class="glorp-small">
+                        <div class="glorp-placeholder">[Glorp]</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Page -->
+        <section id="about" class="page">
+            <h1 class="about-title">About SolarScope</h1>
+            <div class="about-content">
+                <p>SolarScope is an interactive educational journey through our solar system. Explore planets, stars, moons, and more with your cosmic guide, Glorp the alien cat!</p>
+                <p>Our mission is to make learning about space fun, engaging, and accessible for curious minds of all ages. From the blazing Sun to the icy outer planets, discover the wonders of our cosmic neighborhood.</p>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
