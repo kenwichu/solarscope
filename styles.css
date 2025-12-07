@@ -48,11 +48,15 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80vw;
-    height: 80vh;
-    background: radial-gradient(circle at center, rgba(0, 150, 255, 0.5) 0%, rgba(0, 50, 150, 0.2) 50%, rgba(10, 15, 43, 0) 70%);
-    animation: pulse 20s infinite alternate;
-    filter: blur(80px);
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center, 
+        rgba(0, 150, 255, 0.5) 0%, 
+        rgba(0, 100, 200, 0.3) 40%, 
+        rgba(0, 50, 150, 0.1) 70%, 
+        rgba(10, 15, 43, 0) 90%);
+    animation: pulse 15s infinite alternate;
+    filter: blur(100px);
     z-index: -1;
     border-radius: 50%;
 }
@@ -64,12 +68,13 @@ body {
     padding: 12px 30px;
     border-radius: 30px;
     font-family: 'Audiowide', cursive;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
     transform: translateY(0);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
 }
 
 .nav-btn:hover {
@@ -97,19 +102,18 @@ body {
 }
 
 .nav {
+    position: fixed;
+    left: 20px;
+    top: 20px;
     display: flex;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px 0;
-    margin: 40px auto 30px;
-    position: relative;
-    z-index: 10;
-    max-width: 90%;
+    flex-direction: row;
+    gap: 10px;
+    z-index: 100;
     background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(5px);
     border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    padding: 5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* Page Styles */
@@ -137,13 +141,16 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 40px;
-    padding: 20px 0;
+    gap: 60px;
+    padding: 80px 20px 40px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    margin: 0;
 }
 
 .alien-cat {
-    width: 350px;
-    height: 350px;
+    width: 450px;
+    height: 450px;
     background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 200, 255, 0.2));
     border-radius: 50%;
     border: 4px solid rgba(0, 255, 136, 0.4);
@@ -154,6 +161,7 @@ body {
     overflow: hidden;
     box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
     animation: float 6s ease-in-out infinite;
+    margin: 0 auto;
 }
 
 @keyframes float {
@@ -165,10 +173,10 @@ body {
 .alien-cat::before {
     content: '';
     position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
     background: linear-gradient(45deg, #00ff88, #00b3ff, #00ff88);
     z-index: -1;
     border-radius: 50%;
