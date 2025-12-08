@@ -1,3 +1,17 @@
+// Debug: Check if image loads
+const sunImage = document.getElementById('sun-image');
+if (sunImage) {
+    sunImage.onload = function() {
+        console.log('Sun image loaded successfully');
+    };
+    sunImage.onerror = function() {
+        console.error('Failed to load sun image at:', sunImage.src);
+        console.log('Trying alternative path...');
+        sunImage.src = 'images/sun.png'; // Try without ./
+    };
+}
+
+// Initialize the page
 document.addEventListener('DOMContentLoaded', function() {
     // Glorp expressions with full paths
     const glorpExpressions = [
@@ -83,6 +97,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const planetName = document.getElementById('planet-name');
     const planetFacts = document.getElementById('planet-facts');
     const funFact = document.getElementById('fun-fact');
+    
+    // Initialize Sun image
+    const sunImg = document.createElement('img');
+    sunImg.src = 'images/sun.png';
+    sunImg.alt = 'The Sun';
+    sunImg.className = 'planet-img';
+    if (planetImage) {
+        planetImage.innerHTML = '';
+        planetImage.appendChild(sunImg);
+    }
     
     // Sample data (in a real app, this would come from an API)
     const solarData = {
@@ -194,6 +218,51 @@ document.addEventListener('DOMContentLoaded', function() {
                 planetName.textContent = objectData.name;
                 planetFacts.textContent = objectData.facts;
                 funFact.textContent = objectData.funFact;
+                
+                // Update the planet image
+                const img = planetImage.querySelector('img');
+                if (img) {
+                    img.style.opacity = '0';
+                    setTimeout(() => {
+                        img.src = `images/${objectId}.png?t=${new Date().getTime()}`;
+                        img.alt = objectData.name;
+                        
+                        // Set different sizes for Sun and other planets
+                        if (objectId === 'sun') {
+                            img.style.width = '120%';
+                            img.style.height = '120%';
+                        } else if (objectId === 'mercury') {
+                            img.style.width = '60%';
+                            img.style.height = '60%';
+                        } else {
+                            img.style.width = '100%';
+                            img.style.height = '100%';
+                        }
+                        
+                        img.onload = function() {
+                            img.style.opacity = '1';
+                        };
+                        img.onerror = function() {
+                            // Fallback to text if image fails to load
+                            planetImage.innerHTML = `[${objectData.name} Image]`;
+                        };
+                    }, 100);
+                } else {
+                    // If no image element exists, create one
+                    const newImg = document.createElement('img');
+                    newImg.src = `images/${objectId}.png?t=${new Date().getTime()}`;
+                    newImg.alt = objectData.name;
+                    newImg.className = 'planet-img';
+                    newImg.onload = function() {
+                        newImg.style.opacity = '1';
+                    };
+                    newImg.onerror = function() {
+                        // Fallback to text if image fails to load
+                        planetImage.innerHTML = `[${objectData.name} Image]`;
+                    };
+                    planetImage.innerHTML = '';
+                    planetImage.appendChild(newImg);
+                }
                 
                 // Add animation
                 planetImage.style.animation = 'none';

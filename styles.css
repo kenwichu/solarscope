@@ -187,7 +187,6 @@ body {
 .glorp-image {
     width: 160%;
     height: 160%;
-    object-fit: contain;
     transform: translateY(5%) scale(1);
     transition: all 0.3s ease-in-out;
     animation: pulse 4s ease-in-out infinite;
@@ -200,15 +199,20 @@ body {
 
 
 @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+    0% { 
+        transform: scale(1);
+        filter: drop-shadow(0 0 50px rgba(255, 200, 0, 0.7));
+    }
+    50% { 
+        transform: scale(1.05);
+        filter: drop-shadow(0 0 70px rgba(255, 220, 0, 0.9));
+    }
+    100% { 
+        transform: scale(1);
+        filter: drop-shadow(0 0 50px rgba(255, 200, 0, 0.7));
+    }
 }
 
-.alien-cat:hover .glorp-image {
-    transform: scale(1.15) translateY(5%);
-    animation: none;
-}
 
  #explore.page {
     padding-top: 80px;
@@ -358,35 +362,81 @@ body {
     align-items: center;
     justify-content: center;
     padding: 10px 0;
+    min-height: 400px; /* Ensure enough space for larger images */
 }
 
 .planet-image {
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.05);
-    border: 4px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    min-height: 500px;
+    position: relative;
+    margin: 0 auto 30px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 30px;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
+    transform-origin: center center;
 }
 
-.planet-image::before {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
-    background: linear-gradient(45deg, #ff9900, #ff3366, #9900ff);
-    z-index: -1;
+.planet-img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
     border-radius: 50%;
-    opacity: 0.3;
-    filter: blur(20px);
-    animation: rotate 20s linear infinite;
+    animation: sunPulse 4s ease-in-out infinite;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+/* Sun specific styles */
+/* Sun specific styles */
+.planet-img[alt="The Sun"],
+.planet-img[alt="Sun"] {
+    width: 220px !important;
+    height: 220px !important;
+    min-width: 220px;
+    min-height: 220px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    z-index: 1;
+    filter: drop-shadow(0 0 80px rgba(255, 150, 0, 0.9)) brightness(1.3);
+    animation: sunPulse 3s ease-in-out infinite;
+    transition: transform 0.3s ease, filter 0.3s ease !important;
+    cursor: pointer;
+}
+
+.planet-img[alt="The Sun"]:hover,
+.planet-img[alt="Sun"]:hover {
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+/* Mercury specific styles */
+/* Mercury specific styles */
+.planet-img[alt="Mercury"] {
+    width: 150px !important;
+    height: 150px !important;
+    margin: 0;
+    filter: drop-shadow(0 0 30px rgba(150, 150, 150, 0.7));
+    animation: none !important;
+}
+
+/* Venus specific styles */
+.planet-img[alt="Venus"] {
+    width: 120px !important;
+    height: 120px !important;
+    margin: 0;
+    filter: drop-shadow(0 0 30px rgba(200, 180, 100, 0.7));
+}
+
+.planet-img:not([alt="Sun"]):not([alt="The Sun"]):hover {
+    transform: scale(1.05);
+    animation: none;
 }
 
 @keyframes rotate {
