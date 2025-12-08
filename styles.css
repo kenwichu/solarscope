@@ -141,7 +141,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 60px;
+    gap: 40px; /* a bit less space so the title feels more centered */
     padding: 80px 20px 40px;
     min-height: 100vh;
     box-sizing: border-box;
@@ -151,8 +151,8 @@ body {
 
 .alien-cat {
     position: relative;
-    width: 450px;
-    height: 450px;
+    width: 600px;
+    height: 600px;
     margin: 0 auto;
 }
 
@@ -180,16 +180,70 @@ body {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    transform: translateY(5%);
+    transform: translateY(5%) scale(1.9);
     transition: all 0.3s ease-in-out;
-    animation: float 6s ease-in-out infinite, pulse 4s ease-in-out infinite;
+    animation: float 6s ease-in-out infinite;
     cursor: pointer;
-    will-change: transform, opacity;
+    will-change: transform, opacity, left;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     -moz-osx-font-smoothing: grayscale;
     position: relative;
     z-index: 2;
+    left: 0;
+}
+
+@keyframes flyRightAndBack {
+    0% {
+        /* start at original spot */
+        transform:
+            translateX(0)
+            translateY(5%)
+            rotate(0deg)
+            scale(1);
+        filter: drop-shadow(0 5px 5px rgba(0,0,0,0.3));
+    }
+    30% {
+        /* fly to the RIGHT */
+        transform:
+            translateX(140px)
+            translateY(-6%)
+            rotate(5deg)
+            scale(1.03);
+        filter: drop-shadow(0 15px 10px rgba(0,0,0,0.2));
+    }
+    70% {
+        /* then fly to the LEFT */
+        transform:
+            translateX(-140px)
+            translateY(-4%)
+            rotate(-5deg)
+            scale(0.99);
+        filter: drop-shadow(0 12px 9px rgba(0,0,0,0.22));
+    }
+    100% {
+        /* and smoothly come back to the middle */
+        transform:
+            translateX(0)
+            translateY(5%)
+            rotate(0deg)
+            scale(1);
+        filter: drop-shadow(0 5px 5px rgba(0,0,0,0.3));
+    }
+}
+
+.glorp-image.flying {
+    animation: flyRightAndBack 1.8s forwards;
+    z-index: 100;
+}
+
+/* Remove any green background */
+.alien-cat::before {
+    display: none;
+}
+
+.glorp-image {
+    background: transparent !important;
 }
 
 
@@ -414,6 +468,7 @@ body {
 .main-content {
     max-width: 600px;
     text-align: center;
+    transform: translateX(-120px) translateY(-80px); /* move whole text block left and much higher */
 }
 
 .logo {
@@ -424,7 +479,7 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 0 0 30px rgba(255, 247, 0, 0.5);
-    margin: 0;
+    margin: 0 auto 0 auto; /* normal vertical position relative to main-content */
     padding: 0 20px;
     letter-spacing: 2px;
     white-space: nowrap;
@@ -470,7 +525,7 @@ body {
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin: 0 0 10px 0; /* Removed negative margin and reduced bottom margin */
+    margin: 0 0 10px 0; /* Centered in its container */
     padding: 20px 20px 0 20px; /* Added top padding */
     letter-spacing: 2px;
     white-space: nowrap;
@@ -733,17 +788,13 @@ body {
     justify-content: flex-end;
 }
 
-.glorp-small .glorp-placeholder {
-    width: 100px;
-    height: 100px;
-    background: rgba(0, 255, 136, 0.1);
-    border: 2px solid rgba(0, 255, 136, 0.3);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    color: rgba(0, 255, 136, 0.7);
+.glorp-explore {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    animation: float 6s ease-in-out infinite;
+    filter: drop-shadow(0 0 18px rgba(0, 255, 200, 0.6));
+    cursor: pointer;
 }
 
 #about.page {
@@ -823,7 +874,8 @@ body {
     }
     
     .glorp-image {
-        transform: translateY(5%) scale(0.9);
+        /* keep him big on mobile too */
+        transform: translateY(5%) scale(1.6);
     }
     
     .planet-image {

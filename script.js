@@ -27,15 +27,19 @@ document.addEventListener('DOMContentLoaded', function() {
         glorpImage.src = glorpExpressions[0];
         
         glorpImage.addEventListener('click', function() {
-            // Add a quick fade out
-            this.style.opacity = '0.5';
-            this.style.transform = 'scale(0.95)';
+            // Add flying class to trigger the animation (can be clicked even while flying)
+            this.classList.add('flying');
             
-            // Change the image after a short delay for better effect
+            // Change expression and reset animation after it completes
             setTimeout(() => {
+                // Change expression
                 const currentSrc = this.src.split('/').pop();
-                const currentPath = this.src.substring(0, this.src.lastIndexOf('/') + 1);
                 const currentFile = currentSrc.includes('?') ? currentSrc.split('?')[0] : currentSrc;
+                
+                // Remove flying class after animation completes (1.5s)
+                setTimeout(() => {
+                    this.classList.remove('flying');
+                }, 1500);
                 
                 // Find current index or default to 0
                 let currentIndex = 0;
