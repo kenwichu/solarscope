@@ -146,21 +146,13 @@ body {
     min-height: 100vh;
     box-sizing: border-box;
     margin: 0;
+    position: relative;
 }
 
 .alien-cat {
+    position: relative;
     width: 450px;
     height: 450px;
-    background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 200, 255, 0.2));
-    border-radius: 50%;
-    border: 4px solid rgba(0, 255, 136, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
-    animation: float 6s ease-in-out infinite;
     margin: 0 auto;
 }
 
@@ -173,38 +165,41 @@ body {
 .alien-cat::before {
     content: '';
     position: absolute;
-    top: -20px;
-    left: -20px;
-    right: -20px;
-    bottom: -20px;
-    background: linear-gradient(45deg, #00ff88, #00b3ff, #00ff88);
-    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 200, 255, 0.2));
     border-radius: 50%;
-    opacity: 0.5;
-    filter: blur(20px);
+    border: 4px solid rgba(0, 255, 136, 0.4);
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+    z-index: 1;
 }
 
 .glorp-image {
-    width: 160%;
-    height: 160%;
-    transform: translateY(5%) scale(1);
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform: translateY(5%);
     transition: all 0.3s ease-in-out;
-    animation: pulse 4s ease-in-out infinite;
+    animation: float 6s ease-in-out infinite, pulse 4s ease-in-out infinite;
     cursor: pointer;
     will-change: transform, opacity;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    z-index: 2;
 }
 
 
 /* Planet-specific animations */
 @keyframes sunPulse {
     0%, 100% { 
-        filter: drop-shadow(0 0 60px rgba(255, 200, 0, 0.9)) drop-shadow(0 0 70px rgba(255, 150, 0, 0.6));
+        filter: drop-shadow(0 0 60px rgba(255, 200, 0, 0.9)) drop-shadow(0 0 100px rgba(255, 150, 0, 0.6));
     }
     50% { 
-        filter: drop-shadow(0 0 80px rgba(255, 200, 0, 1)) drop-shadow(0 0 70px rgba(255, 150, 0, 0.8));
+        filter: drop-shadow(0 0 80px rgba(255, 200, 0, 1)) drop-shadow(0 0 120px rgba(255, 150, 0, 0.8));
     }
 }
 
@@ -264,37 +259,155 @@ body {
 
 @keyframes uranusPulse {
     0%, 100% { 
-        transform: scale(1);
-        filter: drop-shadow(0 0 40px rgba(64, 224, 208, 0.9)) 
-                drop-shadow(0 0 65px rgba(72, 209, 204, 0.6))
-                drop-shadow(0 0 50px rgba(83, 83, 83, 0.356));
+        filter: drop-shadow(0 0 40px rgba(64, 224, 208, 0.9)) drop-shadow(0 0 65px rgba(72, 209, 204, 0.6));
     }
     50% { 
-        transform: scale(1.05);
-        filter: drop-shadow(0 0 55px rgba(64, 224, 208, 1)) 
-                drop-shadow(0 0 85px rgba(72, 209, 204, 0.8))
-                drop-shadow(0 0 70px rgba(64, 64, 64, 0.172));
+        filter: drop-shadow(0 0 55px rgba(64, 224, 208, 1)) drop-shadow(0 0 85px rgba(72, 209, 204, 0.8));
     }
 }
 
 @keyframes neptunePulse {
     0%, 100% { 
-        transform: scale(1);
-        filter: drop-shadow(0 0 40px rgba(65, 105, 225, 0.9)) 
-                drop-shadow(0 0 65px rgba(30, 144, 255, 0.6))
-                drop-shadow(0 0 50px rgba(83, 83, 83, 0.356));
+        filter: drop-shadow(0 0 40px rgba(65, 105, 225, 0.9)) drop-shadow(0 0 65px rgba(30, 144, 255, 0.6));
     }
     50% { 
-        transform: scale(1.05);
-        filter: drop-shadow(0 0 55px rgba(65, 105, 225, 1)) 
-                drop-shadow(0 0 85px rgba(30, 144, 255, 0.8))
-                drop-shadow(0 0 70px rgba(64, 64, 64, 0.172));
+        filter: drop-shadow(0 0 55px rgba(65, 105, 225, 1)) drop-shadow(0 0 85px rgba(30, 144, 255, 0.8));
     }
+}
+
+@keyframes moonPulse {
+    0%, 100% { 
+        filter: drop-shadow(0 0 35px rgba(220, 220, 220, 0.8)) drop-shadow(0 0 55px rgba(192, 192, 192, 0.5));
+    }
+    50% { 
+        filter: drop-shadow(0 0 50px rgba(220, 220, 220, 1)) drop-shadow(0 0 70px rgba(192, 192, 192, 0.7));
+    }
+}
+
+@keyframes asteroidPulse {
+    0%, 100% { 
+        filter: drop-shadow(0 0 35px rgba(139, 90, 43, 0.8)) drop-shadow(0 0 55px rgba(101, 67, 33, 0.5));
+    }
+    50% { 
+        filter: drop-shadow(0 0 50px rgba(139, 90, 43, 1)) drop-shadow(0 0 70px rgba(101, 67, 33, 0.7));
+    }
+}
+
+@keyframes missionPulse {
+    0%, 100% { 
+        filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 60px rgba(100, 149, 237, 0.6));
+    }
+    50% { 
+        filter: drop-shadow(0 0 55px rgba(255, 255, 255, 1)) drop-shadow(0 0 80px rgba(100, 149, 237, 0.8));
+    }
+}
+
+/* Sun specific styles */
+.planet-img[alt="The Sun"],
+.planet-img[alt="Sun"] {
+    width: 380px !important;
+    height: 380px !important;
+    animation: sunPulse 4s ease-in-out infinite;
+}
+
+.planet-img[alt="The Sun"]:hover,
+.planet-img[alt="Sun"]:hover {
+    transform: scale(1.1);
+    animation: none !important;
+    filter: brightness(1.1) saturate(1.1);
+}
+
+/* Mercury specific styles */
+.planet-img[alt="Mercury"] {
+    width: 180px !important;
+    height: 180px !important;
+    animation: mercuryPulse 4s ease-in-out infinite;
+}
+
+/* Venus specific styles */
+.planet-img[alt="Venus"] {
+    width: 240px !important;
+    height: 240px !important;
+    animation: venusPulse 4s ease-in-out infinite;
+}
+
+/* Earth specific styles */
+.planet-img[alt="Earth"] {
+    width: 250px !important;
+    height: 250px !important;
+    animation: earthPulse 4s ease-in-out infinite;
+}
+
+/* Mars specific styles */
+.planet-img[alt="Mars"] {
+    width: 200px !important;
+    height: 200px !important;
+    animation: marsPulse 4s ease-in-out infinite;
+}
+
+/* Jupiter specific styles */
+.planet-img[alt="Jupiter"] {
+    width: 400px !important;
+    height: 400px !important;
+    animation: jupiterPulse 4s ease-in-out infinite;
+}
+
+/* Saturn specific styles */
+.planet-img[alt="Saturn"] {
+    width: 450px !important;
+    height: 450px !important;
+    animation: saturnPulse 4s ease-in-out infinite;
+}
+
+/* Uranus specific styles */
+.planet-img[alt="Uranus"] {
+    width: 280px !important;
+    height: 280px !important;
+    animation: uranusPulse 4s ease-in-out infinite;
+}
+
+/* Neptune specific styles */
+.planet-img[alt="Neptune"] {
+    width: 330px !important;
+    height: 330px !important;
+    animation: neptunePulse 4s ease-in-out infinite;
+}
+
+/* Moon specific styles */
+.planet-img[alt="The Moon"],
+.planet-img[alt="Moon"],
+#moons-image {
+    width: 150px !important;
+    height: 150px !important;
+    animation: moonPulse 4s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+
+/* Asteroids specific styles */
+.planet-img[alt="Asteroids"],
+.planet-img[alt="Asteroid Belt"],
+.planet-img[alt="Asteroids & Meteoroids"] {
+    width: 350px !important;
+    height: 350px !important;
+    animation: asteroidPulse 4s ease-in-out infinite;
+    position: relative;
+    top: 10px; /* Push down slightly */
+}
+
+/* Space Missions specific styles */
+.planet-img[alt="Space Missions"],
+.planet-img[alt="Missions"] {
+    width: 320px !important;
+    height: 320px !important;
+    animation: missionPulse 4s ease-in-out infinite;
 }
 
 
  #explore.page {
-    padding-top: 80px;
+    padding: 20px 0 0 0; /* Reduced top padding */
 }
 
 
@@ -357,8 +470,8 @@ body {
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin: -50px 0 20px 0;
-    padding: 0 20px;
+    margin: 0 0 10px 0; /* Removed negative margin and reduced bottom margin */
+    padding: 20px 20px 0 20px; /* Added top padding */
     letter-spacing: 2px;
     white-space: nowrap;
     overflow: visible;
@@ -438,37 +551,37 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding-top: 10px;
-    margin-top: -120px;  /* Pull content up more */
     align-items: center;
-    justify-content: center;
-    padding: 10px 0;
-    min-height: 400px; /* Ensure enough space for larger images */
+    justify-content: flex-start; /* Changed from center to flex-start */
+    position: relative;
+    height: 450px; /* Increased height to accommodate lower positioning */
+    margin: 0;
+    padding-top: 50px; /* Added padding to push content down */
+    overflow: visible;
 }
 
 .planet-image {
     width: 100%;
-    min-height: 500px;
-    position: relative;
-    margin: -60px auto 20px; /* pulled up */
-    transform: translateY(-40px); /* lifted visually */
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    overflow: visible;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
 .planet-img {
-    width: 100%;
-    height: 100%;
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 90%;
+    max-height: 90%;
     object-fit: contain;
     border-radius: 50%;
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
+    margin: 0 auto;
+    display: block;
 }
 
 .planet-img[alt="The Sun"],
@@ -509,8 +622,8 @@ body {
 }
 
 .planet-img[alt="Saturn"] {
-    width: 380px !important;
-    height: 380px !important;
+    width: 450px !important;
+    height: 450px !important;
     animation: saturnPulse 4s ease-in-out infinite;
 }
 
@@ -518,17 +631,29 @@ body {
     width: 280px !important;
     height: 280px !important;
     animation: uranusPulse 4s ease-in-out infinite;
+    transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 .planet-img[alt="Neptune"] {
-    width: 270px !important;
-    height: 270px !important;
+    width: 330px !important;
+    height: 330px !important;
     animation: neptunePulse 4s ease-in-out infinite;
+    transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-.planet-img:not([alt="Sun"]):not([alt="The Sun"]):hover {
+/* Hover effect for all planets - removes glow */
+.planet-img:hover {
     transform: scale(1.05);
-    animation: none;
+    animation: none !important;
+    filter: brightness(1.1) saturate(1.1);
+}
+
+/* Special case for Sun to make it slightly larger on hover */
+.planet-img[alt="The Sun"]:hover,
+.planet-img[alt="Sun"]:hover {
+    transform: scale(1.1);
+    animation: none !important;
+    filter: brightness(1.1) saturate(1.1);
 }
 
 @keyframes rotate {
@@ -540,11 +665,18 @@ body {
     font-size: 36px;
     font-weight: bold;
     color: white;
-    margin-top: -60px;  /* Pull name up even more */
-    margin-bottom: 20px;
+    margin: 20px 0;
     text-transform: uppercase;
     letter-spacing: 2px;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    text-align: center;
+    width: 100%;
+    white-space: normal;
+    padding: 0 20px;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    position: relative;
+    z-index: 2;
 }
 
 /* Facts Panel */
@@ -690,9 +822,14 @@ body {
         height: 300px;
     }
     
+    .glorp-image {
+        transform: translateY(5%) scale(0.9);
+    }
+    
     .planet-image {
         width: 280px;
         height: 280px;
+        animation: pulse 5s ease-in-out infinite;
     }
     
     .about-title {
@@ -700,6 +837,39 @@ body {
     }
     
     .about-content {
-        padding: 20px;
+        max-width: 700px;
+        margin: 0 auto;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(0, 150, 255, 0.3);
+        border-radius: 20px;
+        padding: 30px;
+        line-height: 1.8;
+        color: #ddd;
+        font-size: 18px;
+    }
+    
+    .about-content p {
+        margin-bottom: 20px;
+    }
+    
+    .about-footer {
+        margin-top: 30px;
+        text-align: center;
+        color: #00ccff;
+        font-size: 16px;
+        opacity: 0.8;
+    }
+    
+    /* Animations */
+    @keyframes move-twink-back {
+        from { background-position: 0 0; }
+        to { background-position: -10000px 5000px; }
+    }
+    
+    @keyframes pulse {
+        0% { transform: scale(1); opacity: 0.85; }
+        50% { transform: scale(1.04); opacity: 1; }
+        100% { transform: scale(1); opacity: 0.85; }
     }
 }

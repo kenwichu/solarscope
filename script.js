@@ -160,15 +160,15 @@ document.addEventListener('DOMContentLoaded', function() {
             facts: 'Moons are natural satellites that orbit planets. Our solar system has over 200 known moons! They come in all shapes and sizes - some are tiny rocks, while others like Ganymede are larger than the planet Mercury. Moons are held in orbit by their planet\'s gravity.',
             funFact: 'Not all planets have moons! Mercury and Venus have zero moons, while Jupiter has 95 known moons - it\'s like having its own mini solar system! Some moons like Europa and Enceladus might have oceans under their icy surfaces where alien life could exist!'
         },
-        asteroids: {
-            name: 'Asteroids',
-            facts: 'Asteroids are rocky objects that orbit the Sun but are too small to be called planets. Most asteroids are found in the asteroid belt between Mars and Jupiter. They range in size from tiny pebbles to objects hundreds of kilometers wide like Ceres.',
-            funFact: 'Asteroids are leftover building blocks from when the solar system formed 4.6 billion years ago! They never got to become a planet because Jupiter\'s gravity kept stirring them up. Some asteroids are actually more valuable than Earth - one called 16 Psyche is made of metal worth quintillions of dollars!'
+        'asteroids-meteoroids': {
+            name: 'Asteroids & Meteoroids',
+            facts: 'Asteroids are rocky objects that orbit the Sun, found mainly in the asteroid belt between Mars and Jupiter. Meteoroids are smaller space rocks that become meteors (shooting stars) when they enter Earth\'s atmosphere. Comets are icy objects that develop glowing tails when near the Sun. Together, these celestial objects are remnants from the formation of our solar system 4.6 billion years ago.',
+            funFact: 'Asteroid 16 Psyche is made of metal worth quintillions of dollars! Every day, about 100 tons of space dust and small meteoroids enter Earth\'s atmosphere. Most burn up as meteors, but some reach the ground as meteorites. The largest meteorite found on Earth is the Hoba meteorite in Namibia, weighing about 60 tons!'
         },
-        meteoroids: {
-            name: 'Meteoroids & Comets',
-            facts: 'Meteoroids are small rocky or metallic objects in space. When they enter Earth\'s atmosphere and burn up, we call them meteors or "shooting stars." If they survive and hit the ground, they\'re called meteorites. Comets are icy objects that develop glowing tails when they approach the Sun.',
-            funFact: 'Every day, about 100 tons of dust and sand-sized particles fall to Earth from space! Comets are like dirty snowballs - they\'re made of ice, dust, and rock. When a comet gets close to the Sun, the ice turns to gas and creates those beautiful glowing tails that can stretch millions of kilometers!'
+        'space-missions': {
+            name: 'Space Missions',
+            facts: 'Humanity has launched numerous missions to explore our solar system and beyond. From the Apollo Moon landings to the Voyager probes now in interstellar space, these missions have expanded our understanding of the cosmos. Current missions like the James Webb Space Telescope and Mars rovers continue to make groundbreaking discoveries every day.',
+            funFact: 'The Voyager 1 spacecraft, launched in 1977, is now over 14 billion miles from Earth and has entered interstellar space! It carries the Golden Record, a time capsule of sounds and images from Earth, in case it\'s ever found by intelligent life. The record includes greetings in 55 languages and music from different cultures!'
         }
     };
     
@@ -253,6 +253,20 @@ document.addEventListener('DOMContentLoaded', function() {
                     newImg.src = `images/${objectId}.png?t=${new Date().getTime()}`;
                     newImg.alt = objectData.name;
                     newImg.className = 'planet-img';
+                    
+                    // Special handling for Moon to ensure glow effect
+                    if (objectId === 'moons') {
+                        newImg.id = 'moons-image';
+                        // Force reflow to ensure styles are applied
+                        void newImg.offsetHeight;
+                    }
+                    
+                    // Set specific size for Moon
+                    if (objectId === 'moons') {
+                        newImg.style.width = '180px';
+                        newImg.style.height = '180px';
+                    }
+                    
                     newImg.onload = function() {
                         newImg.style.opacity = '1';
                     };
