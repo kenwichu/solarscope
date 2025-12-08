@@ -198,11 +198,87 @@ body {
 }
 
 
-@keyframes pulse {
-    0% { 
-        transform: scale(1);
-        filter: drop-shadow(0 0 50px rgba(255, 200, 0, 0.7));
+/* Planet-specific animations */
+@keyframes sunPulse {
+    0%, 100% { 
+        filter: drop-shadow(0 0 60px rgba(255, 200, 0, 0.9)) drop-shadow(0 0 100px rgba(255, 150, 0, 0.6));
     }
+    50% { 
+        filter: drop-shadow(0 0 80px rgba(255, 200, 0, 1)) drop-shadow(0 0 120px rgba(255, 150, 0, 0.8));
+    }
+}
+
+@keyframes mercuryPulse {
+    0%, 100% { 
+        filter: drop-shadow(0 0 30px rgba(169, 169, 169, 0.8)) drop-shadow(0 0 50px rgba(128, 128, 128, 0.5));
+    }
+    50% { 
+        filter: drop-shadow(0 0 45px rgba(169, 169, 169, 1)) drop-shadow(0 0 65px rgba(128, 128, 128, 0.7));
+    }
+}
+
+@keyframes venusPulse {
+    0%, 100% { 
+        filter: drop-shadow(0 0 40px rgba(255, 198, 73, 0.9)) drop-shadow(0 0 60px rgba(230, 180, 100, 0.6));
+    }
+    50% { 
+        filter: drop-shadow(0 0 55px rgba(255, 198, 73, 1)) drop-shadow(0 0 80px rgba(230, 180, 100, 0.8));
+    }
+}
+
+@keyframes earthPulse {
+    0%, 100% { 
+        filter: drop-shadow(0 0 40px rgba(30, 144, 255, 0.9)) drop-shadow(0 0 60px rgba(0, 191, 255, 0.6));
+    }
+    50% { 
+        filter: drop-shadow(0 0 55px rgba(30, 144, 255, 1)) drop-shadow(0 0 80px rgba(0, 191, 255, 0.8));
+    }
+}
+
+@keyframes marsPulse {
+    0%, 100% { 
+        filter: drop-shadow(0 0 35px rgba(255, 69, 0, 0.9)) drop-shadow(0 0 55px rgba(220, 20, 60, 0.6));
+    }
+    50% { 
+        filter: drop-shadow(0 0 50px rgba(255, 69, 0, 1)) drop-shadow(0 0 75px rgba(220, 20, 60, 0.8));
+    }
+}
+
+@keyframes jupiterPulse {
+    0%, 100% { 
+        filter: drop-shadow(0 0 50px rgba(210, 180, 140, 0.8)) drop-shadow(0 0 80px rgba(205, 133, 63, 0.5));
+    }
+    50% { 
+        filter: drop-shadow(0 0 65px rgba(210, 180, 140, 1)) drop-shadow(0 0 100px rgba(205, 133, 63, 0.7));
+    }
+}
+
+@keyframes saturnPulse {
+    0%, 100% { 
+        filter: drop-shadow(0 0 45px rgba(244, 164, 96, 0.8)) drop-shadow(0 0 75px rgba(210, 180, 140, 0.5));
+    }
+    50% { 
+        filter: drop-shadow(0 0 60px rgba(244, 164, 96, 1)) drop-shadow(0 0 95px rgba(210, 180, 140, 0.7));
+    }
+}
+
+@keyframes uranusPulse {
+    0%, 100% { 
+        filter: drop-shadow(0 0 40px rgba(64, 224, 208, 0.9)) drop-shadow(0 0 65px rgba(72, 209, 204, 0.6));
+    }
+    50% { 
+        filter: drop-shadow(0 0 55px rgba(64, 224, 208, 1)) drop-shadow(0 0 85px rgba(72, 209, 204, 0.8));
+    }
+}
+
+@keyframes neptunePulse {
+    0%, 100% { 
+        filter: drop-shadow(0 0 40px rgba(65, 105, 225, 0.9)) drop-shadow(0 0 65px rgba(30, 144, 255, 0.6));
+    }
+    50% { 
+        filter: drop-shadow(0 0 55px rgba(65, 105, 225, 1)) drop-shadow(0 0 85px rgba(30, 144, 255, 0.8));
+    }
+
     50% { 
         transform: scale(1.05);
         filter: drop-shadow(0 0 70px rgba(255, 220, 0, 0.9));
@@ -359,6 +435,8 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
+    padding-top: 10px;
+    margin-top: -120px;  /* Pull content up more */
     align-items: center;
     justify-content: center;
     padding: 10px 0;
@@ -369,13 +447,13 @@ body {
     width: 100%;
     min-height: 500px;
     position: relative;
-    margin: 0 auto 30px;
+    margin: -60px auto 20px; /* pulled up */
+    transform: translateY(-40px); /* lifted visually */
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: visible;
-    transform-origin: center center;
 }
 
 .planet-img {
@@ -385,53 +463,64 @@ body {
     max-height: 100%;
     object-fit: contain;
     border-radius: 50%;
-    animation: sunPulse 4s ease-in-out infinite;
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
 }
 
-/* Sun specific styles */
-/* Sun specific styles */
 .planet-img[alt="The Sun"],
 .planet-img[alt="Sun"] {
-    width: 220px !important;
-    height: 220px !important;
-    min-width: 220px;
-    min-height: 220px;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1);
-    z-index: 1;
-    filter: drop-shadow(0 0 80px rgba(255, 150, 0, 0.9)) brightness(1.3);
-    animation: sunPulse 3s ease-in-out infinite;
-    transition: transform 0.3s ease, filter 0.3s ease !important;
-    cursor: pointer;
+    width: 380px !important;
+    height: 380px !important;
+    animation: sunPulse 4s ease-in-out infinite;
 }
 
-.planet-img[alt="The Sun"]:hover,
-.planet-img[alt="Sun"]:hover {
-    transform: translate(-50%, -50%) scale(1.05);
-}
-
-/* Mercury specific styles */
-/* Mercury specific styles */
 .planet-img[alt="Mercury"] {
-    width: 150px !important;
-    height: 150px !important;
-    margin: 0;
-    filter: drop-shadow(0 0 30px rgba(150, 150, 150, 0.7));
-    animation: none !important;
+    width: 180px !important;
+    height: 180px !important;
+    animation: mercuryPulse 4s ease-in-out infinite;
 }
 
-/* Venus specific styles */
 .planet-img[alt="Venus"] {
-    width: 120px !important;
-    height: 120px !important;
-    margin: 0;
-    filter: drop-shadow(0 0 30px rgba(200, 180, 100, 0.7));
+    width: 240px !important;
+    height: 240px !important;
+    animation: venusPulse 4s ease-in-out infinite;
+}
+
+.planet-img[alt="Earth"] {
+    width: 250px !important;
+    height: 250px !important;
+    animation: earthPulse 4s ease-in-out infinite;
+}
+
+.planet-img[alt="Mars"] {
+    width: 200px !important;
+    height: 200px !important;
+    animation: marsPulse 4s ease-in-out infinite;
+}
+
+.planet-img[alt="Jupiter"] {
+    width: 400px !important;
+    height: 400px !important;
+    animation: jupiterPulse 4s ease-in-out infinite;
+}
+
+.planet-img[alt="Saturn"] {
+    width: 380px !important;
+    height: 380px !important;
+    animation: saturnPulse 4s ease-in-out infinite;
+}
+
+.planet-img[alt="Uranus"] {
+    width: 280px !important;
+    height: 280px !important;
+    animation: uranusPulse 4s ease-in-out infinite;
+}
+
+.planet-img[alt="Neptune"] {
+    width: 270px !important;
+    height: 270px !important;
+    animation: neptunePulse 4s ease-in-out infinite;
 }
 
 .planet-img:not([alt="Sun"]):not([alt="The Sun"]):hover {
@@ -448,6 +537,8 @@ body {
     font-size: 36px;
     font-weight: bold;
     color: white;
+    margin-top: -60px;  /* Pull name up even more */
+    margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 2px;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
