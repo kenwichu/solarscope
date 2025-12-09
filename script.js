@@ -243,19 +243,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     newImg.alt = objectData.name;
                     newImg.className = 'planet-img';
                     
-                    // Special handling for Moon to ensure glow effect
-                    if (objectId === 'moons') {
-                        newImg.id = 'moons-image';
-                        // Force reflow to ensure styles are applied
-                        void newImg.offsetHeight;
-                    }
-                    
-                    // Set specific size for Moon
-                    if (objectId === 'moons') {
-                        newImg.style.width = '180px';
-                        newImg.style.height = '180px';
-                    }
-                    
                     newImg.onload = function() {
                         newImg.style.opacity = '1';
                     };

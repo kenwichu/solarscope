@@ -431,12 +431,10 @@ body {
 .planet-img[alt="The Moon"],
 .planet-img[alt="Moon"],
 #moons-image {
-    width: 150px !important;
-    height: 150px !important;
+    width: 100px !important;
+    height: 100px !important;
     animation: moonPulse 4s ease-in-out infinite;
     position: relative;
-    z-index: 1;
-    transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 
@@ -610,6 +608,114 @@ body {
     color: white;
     font-weight: bold;
     box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+}
+
+/* Planet Display */
+.planet-display {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Changed from center to flex-start */
+    position: relative;
+    height: 450px; /* Increased height to accommodate lower positioning */
+    margin: 0;
+    padding-top: 50px; /* Added padding to push content down */
+    overflow: visible;
+}
+
+.planet-image {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.planet-img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    margin: 0 auto;
+    display: block;
+}
+
+.planet-img[alt="The Sun"],
+.planet-img[alt="Sun"] {
+    width: 380px !important;
+    height: 380px !important;
+    animation: sunPulse 4s ease-in-out infinite;
+}
+
+.planet-img[alt="Mercury"] {
+    width: 180px !important;
+    height: 180px !important;
+    animation: mercuryPulse 4s ease-in-out infinite;
+}
+
+.planet-img[alt="Venus"] {
+    width: 240px !important;
+    height: 240px !important;
+    animation: venusPulse 4s ease-in-out infinite;
+}
+
+.planet-img[alt="Earth"] {
+    width: 250px !important;
+    height: 250px !important;
+    animation: earthPulse 4s ease-in-out infinite;
+}
+
+.planet-img[alt="Mars"] {
+    width: 200px !important;
+    height: 200px !important;
+    animation: marsPulse 4s ease-in-out infinite;
+}
+
+.planet-img[alt="Jupiter"] {
+    width: 400px !important;
+    height: 400px !important;
+    animation: jupiterPulse 4s ease-in-out infinite;
+}
+
+.planet-img[alt="Saturn"] {
+    width: 450px !important;
+    height: 450px !important;
+    animation: saturnPulse 4s ease-in-out infinite;
+}
+
+.planet-img[alt="Uranus"] {
+    width: 280px !important;
+    height: 280px !important;
+    animation: uranusPulse 4s ease-in-out infinite;
+}
+
+.planet-img[alt="Neptune"] {
+    width: 330px !important;
+    height: 330px !important;
+    animation: neptunePulse 4s ease-in-out infinite;
+}
+
+/* Hover effect for all planets - removes glow */
+.planet-img:hover {
+    transform: scale(1.05);
+    animation: none !important;
+    filter: brightness(1.1) saturate(1.1);
+}
+
+/* Special case for Sun to make it slightly larger on hover */
+.planet-img[alt="The Sun"]:hover,
+.planet-img[alt="Sun"]:hover {
+    transform: scale(1.1);
+    animation: none !important;
+    filter: brightness(1.1) saturate(1.1);
 }
 
 @keyframes rotate {
