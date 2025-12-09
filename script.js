@@ -78,8 +78,11 @@ document.addEventListener('DOMContentLoaded', function() {
         navButtons.forEach(btn => btn.classList.remove('active'));
         pages.forEach(page => page.classList.remove('active'));
         
-        // Add active class to clicked button
-        document.querySelector(`.nav-btn[data-page="${pageId}"]`).classList.add('active');
+        // Add active class to clicked button (if there is one for this page)
+        const targetButton = document.querySelector(`.nav-btn[data-page="${pageId}"]`);
+        if (targetButton) {
+            targetButton.classList.add('active');
+        }
         
         // Show corresponding page
         document.getElementById(pageId).classList.add('active');
@@ -92,6 +95,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // Glorp Explore CTA (upper right in Explore page)
+    const glorpExploreCta = document.querySelector('.glorp-explore-cta');
+    if (glorpExploreCta) {
+        glorpExploreCta.addEventListener('click', function() {
+            // Go directly to Solar System Map page
+            switchPage('solar-map');
+        });
+    }
+
     // Initialize first page
     switchPage('home');
     
@@ -176,33 +188,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
     
-    menuItems.forEach(item => {
-        item.addEventListener('click', function() {
-            // Remove active class from all menu items
-            menuItems.forEach(i => i.classList.remove('active'));
-            
-            // Add active class to clicked item
-            this.classList.add('active');
-            
-            // Get the object data
-            const objectId = this.getAttribute('data-object');
-            const objectData = solarData[objectId];
-            
-            // Update the display
-            planetName.textContent = objectData.name;
-            planetImage.textContent = `[${objectData.name} Image Here]`;
-            planetFacts.textContent = objectData.facts;
-            funFact.textContent = objectData.funFact;
-            
-            // Add animation
-            planetImage.style.animation = 'none';
-            setTimeout(() => {
-                planetImage.style.animation = 'pulse 1s';
-            }, 10);
-        });
-    });
-    
-    // Update menu items click handler
     menuItems.forEach(item => {
         item.addEventListener('click', function(e) {
             e.stopPropagation(); // Prevent event from bubbling up
