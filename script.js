@@ -223,6 +223,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         } else if (objectId === 'mercury') {
                             img.style.width = '60%';
                             img.style.height = '60%';
+                        } else if (objectId === 'moons') {
+                            img.style.width = '100px';
+                            img.style.height = '100px';
                         } else {
                             img.style.width = '100%';
                             img.style.height = '100%';
