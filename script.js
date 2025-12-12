@@ -287,11 +287,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 planetFacts.textContent = objectData.facts;
                 
                 // Add classes for Jupiter and Saturn to move names up
-                planetName.classList.remove('jupiter-name', 'saturn-name');
+                planetName.classList.remove('jupiter-name', 'saturn-name', 'asteroids-name', 'sun-name');
                 if (objectId === 'jupiter') {
                     planetName.classList.add('jupiter-name');
                 } else if (objectId === 'saturn') {
                     planetName.classList.add('saturn-name');
+                } else if (objectId === 'asteroids-meteoroids') {
+                    planetName.classList.add('asteroids-name');
+                } else if (objectId === 'sun') {
+                    planetName.classList.add('sun-name');
                 }
                 
                 // Update the planet image

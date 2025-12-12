@@ -938,11 +938,12 @@ body {
 /* Moon specific styles */
 .planet-img[alt="The Moon"],
 .planet-img[alt="Moon"],
+.planet-img[alt="Moons"],
 #moons-image {
-    width: 120px !important;
-    height: 120px !important;
-    max-width: 120px !important;
-    max-height: 120px !important;
+    width: 150px !important;
+    height: 150px !important;
+    max-width: 150px !important;
+    max-height: 150px !important;
     animation: moonPulse 4s ease-in-out infinite;
     position: relative;
     box-shadow: 0 0 30px rgba(200, 200, 255, 0.8) !important,
@@ -959,7 +960,24 @@ body {
     height: 350px !important;
     animation: asteroidPulse 4s ease-in-out infinite;
     position: relative;
+    transform: translateY(-40px);
     top: 10px; /* Push down slightly */
+}
+
+/* Fix asteroids hover to stay at same height */
+.planet-img[alt="Asteroids"]:hover,
+.planet-img[alt="Asteroid Belt"]:hover,
+.planet-img[alt="Asteroids & Meteoroids"]:hover {
+    transform: translateY(-40px) scale(1.1);
+}
+
+/* Fix hover positions for elevated planets */
+.planet-img[alt="Jupiter"]:hover {
+    transform: translateY(-80px) scale(1.1);
+}
+
+.planet-img[alt="Saturn"]:hover {
+    transform: translateY(-10px) scale(1.1);
 }
 
 /* Space Missions specific styles */
@@ -1205,16 +1223,17 @@ body {
     width: 450px !important;
     height: 450px !important;
     animation: saturnPulse 4s ease-in-out infinite;
-    transform: translateY(-85px);
-}
-
-/* Fix hover to stay at same height */
-.planet-img[alt="Jupiter"]:hover {
-    transform: translateY(-80px) scale(1.1);
+    transform: translateY(-35px);
 }
 
 .planet-img[alt="Saturn"]:hover {
-    transform: translateY(-85px) scale(1.1);
+    transform: translateY(-35px) scale(1.1);
+}
+
+/* Specific container override for Saturn and Uranus to prevent cropping */
+.planet-img[alt="Saturn"],
+.planet-img[alt="Uranus"] {
+    max-height: 550px !important; /* Extra height for rings */
 }
 
 .planet-img[alt="Uranus"] {
@@ -1275,7 +1294,9 @@ body {
 
 /* Alternative approach - use JavaScript to add classes */
 .planet-name.jupiter-name,
-.planet-name.saturn-name {
+.planet-name.saturn-name,
+.planet-name.asteroids-name,
+.planet-name.sun-name {
     transform: translateY(-60px);
 }
 
