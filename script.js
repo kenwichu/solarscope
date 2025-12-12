@@ -104,6 +104,53 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Glorp Solar Map Instruction click handler
+    const glorpSolarMap = document.getElementById('glorp-solar-map');
+    const glorpInstructionContainer = document.querySelector('.glorp-solar-map-instruction');
+    if (glorpSolarMap && glorpInstructionContainer) {
+        glorpInstructionContainer.addEventListener('click', function() {
+            // Create message element
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'glorp-message-popup';
+            messageDiv.innerHTML = `
+                <div class="glorp-message-content">
+                    <h3>Glorp says:</h3>
+                    <p>"I'm your friendly alien guide! I've traveled across galaxies to help you explore our Solar System. Each planet has amazing secrets - like how Saturn could float in water, or how Venus spins backwards! Just click any planet to discover cool facts. I'll be here to guide you through your cosmic adventure!"</p>
+                    <button class="glorp-message-close">Got it!</button>
+                </div>
+            `;
+            
+            // Add to page
+            document.body.appendChild(messageDiv);
+            
+            // Add fade in animation
+            setTimeout(() => {
+                messageDiv.classList.add('show');
+            }, 10);
+            
+            // Handle close button
+            const closeBtn = messageDiv.querySelector('.glorp-message-close');
+            closeBtn.addEventListener('click', function() {
+                messageDiv.classList.remove('show');
+                setTimeout(() => {
+                    document.body.removeChild(messageDiv);
+                }, 300);
+            });
+            
+            // Auto-close after 10 seconds
+            setTimeout(() => {
+                if (document.body.contains(messageDiv)) {
+                    messageDiv.classList.remove('show');
+                    setTimeout(() => {
+                        if (document.body.contains(messageDiv)) {
+                            document.body.removeChild(messageDiv);
+                        }
+                    }, 300);
+                }
+            }, 10000);
+        });
+    }
+
     // Initialize first page
     switchPage('home');
     
@@ -280,6 +327,170 @@ document.addEventListener('DOMContentLoaded', function() {
     if (sunItem) {
         sunItem.dispatchEvent(new Event('click'));
     }
+    
+    // Planet stats for Glorp's messages
+    const planetStats = {
+        sun: {
+            name: "Sun",
+            type: "Star (G-type main-sequence)",
+            age: "About 4.6 billion years",
+            surface: "~5,500°C",
+            core: "~15 million°C",
+            madeOf: "Hydrogen & Helium",
+            funFact: "Contains 99.8% of the Solar System's total mass"
+        },
+        mercury: {
+            name: "Mercury",
+            type: "Rocky Planet",
+            age: "~4.5 billion years",
+            surface: "−180°C to 430°C",
+            moons: "0",
+            special: "Closest planet to the Sun",
+            funFact: "One year on Mercury = 88 Earth days"
+        },
+        venus: {
+            name: "Venus",
+            type: "Rocky Planet",
+            age: "~4.5 billion years",
+            surface: "~465°C (hottest planet)",
+            moons: "0",
+            special: "Thick toxic atmosphere",
+            funFact: "Spins backward compared to most planets"
+        },
+        earth: {
+            name: "Earth",
+            type: "Rocky Planet",
+            age: "~4.5 billion years",
+            surface: "~15°C average",
+            moons: "1 (The Moon)",
+            special: "Only known planet with life",
+            funFact: "70% of the surface is water"
+        },
+        mars: {
+            name: "Mars",
+            type: "Rocky Planet",
+            age: "~4.5 billion years",
+            surface: "~−60°C average",
+            moons: "2 (Phobos & Deimos)",
+            special: "Known as the Red Planet",
+            funFact: "Has the tallest volcano in the Solar System (Olympus Mons)"
+        },
+        jupiter: {
+            name: "Jupiter",
+            type: "Gas Giant",
+            age: "~4.5 billion years",
+            surface: "~−110°C (cloud tops)",
+            moons: "95+ known",
+            special: "Largest planet",
+            funFact: "Has a giant storm called the Great Red Spot"
+        },
+        saturn: {
+            name: "Saturn",
+            type: "Gas Giant",
+            age: "~4.5 billion years",
+            surface: "~−140°C",
+            moons: "140+ known",
+            special: "Famous for its rings",
+            funFact: "Could float in water (if you had a giant bathtub)"
+        },
+        uranus: {
+            name: "Uranus",
+            type: "Ice Giant",
+            age: "~4.5 billion years",
+            surface: "~−195°C",
+            moons: "27+",
+            special: "Rotates on its side",
+            funFact: "Possibly smells like rotten eggs (hydrogen sulfide)"
+        },
+        neptune: {
+            name: "Neptune",
+            type: "Ice Giant",
+            age: "~4.5 billion years",
+            surface: "~−200°C",
+            moons: "14+",
+            special: "Extremely strong winds",
+            funFact: "Furthest planet from the Sun"
+        },
+        moons: {
+            name: "Moons",
+            type: "Natural Satellites",
+            total: "200+ across the Solar System",
+            biggest: "Ganymede (Jupiter)",
+            mostMoons: "Saturn",
+            funFact: "Earth's Moon stabilizes Earth's tilt, helping life exist"
+        }
+    };
+    
+    // Solar Map planet click handlers
+    const solarMapPlanets = document.querySelectorAll('#solar-map .planet');
+    console.log('Found solar map planets:', solarMapPlanets.length);
+    
+    solarMapPlanets.forEach(planet => {
+        console.log('Setting up click for:', planet.getAttribute('data-planet'));
+        planet.addEventListener('click', function(e) {
+            e.stopPropagation();
+            console.log('Clicked planet:', this.getAttribute('data-planet'));
+            const planetName = this.getAttribute('data-planet');
+            const stats = planetStats[planetName];
+            
+            if (stats) {
+                // Create stats message
+                let statsHTML = `<h3>Glorp's ${stats.name} Stats:</h3><ul>`;
+                
+                for (const [key, value] of Object.entries(stats)) {
+                    if (key !== 'name' && key !== 'funFact') {
+                        const label = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+                        statsHTML += `<li><strong>${label}:</strong> ${value}</li>`;
+                    }
+                }
+                
+                statsHTML += `</ul><p><strong>Fun Fact:</strong> ${stats.funFact}</p>`;
+                
+                // Create message element
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'glorp-message-popup';
+                messageDiv.innerHTML = `
+                    <div class="glorp-message-content">
+                        <div style="text-align: left; font-family: 'Inria Sans', sans-serif;">
+                            ${statsHTML}
+                        </div>
+                        <button class="glorp-message-close">Awesome!</button>
+                    </div>
+                `;
+                
+                // Add to page
+                document.body.appendChild(messageDiv);
+                
+                // Add fade in animation
+                setTimeout(() => {
+                    messageDiv.classList.add('show');
+                }, 10);
+                
+                // Handle close button
+                const closeBtn = messageDiv.querySelector('.glorp-message-close');
+                closeBtn.addEventListener('click', function() {
+                    messageDiv.classList.remove('show');
+                    setTimeout(() => {
+                        document.body.removeChild(messageDiv);
+                    }, 300);
+                });
+                
+                // Auto-close after 12 seconds (longer for reading stats)
+                setTimeout(() => {
+                    if (document.body.contains(messageDiv)) {
+                        messageDiv.classList.remove('show');
+                        setTimeout(() => {
+                            if (document.body.contains(messageDiv)) {
+                                document.body.removeChild(messageDiv);
+                            }
+                        }, 300);
+                    }
+                }, 12000);
+            } else {
+                console.log('No stats found for:', planetName);
+            }
+        });
+    });
     
     // Initialize first page
     switchPage('home');
