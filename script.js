@@ -103,6 +103,9 @@ document.addEventListener('DOMContentLoaded', function() {
         navButtons.forEach(btn => btn.classList.remove('active'));
         pages.forEach(page => page.classList.remove('active'));
         
+        // Remove explore-active class from body
+        document.body.classList.remove('explore-active');
+        
         // Add active class to clicked button (if there is one for this page)
         const targetButton = document.querySelector(`.nav-btn[data-page="${pageId}"]`);
         if (targetButton) {
@@ -111,6 +114,11 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Show corresponding page
         document.getElementById(pageId).classList.add('active');
+        
+        // Add explore-active class if explore page is active
+        if (pageId === 'explore') {
+            document.body.classList.add('explore-active');
+        }
     }
     
     navButtons.forEach(button => {
@@ -184,7 +192,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const planetImage = document.getElementById('planet-image');
     const planetName = document.getElementById('planet-name');
     const planetFacts = document.getElementById('planet-facts');
-    const funFact = document.getElementById('fun-fact');
     
     // Initialize Sun image
     const sunImg = document.createElement('img');
@@ -278,7 +285,14 @@ document.addEventListener('DOMContentLoaded', function() {
             if (objectData) {
                 planetName.textContent = objectData.name;
                 planetFacts.textContent = objectData.facts;
-                funFact.textContent = objectData.funFact;
+                
+                // Add classes for Jupiter and Saturn to move names up
+                planetName.classList.remove('jupiter-name', 'saturn-name');
+                if (objectId === 'jupiter') {
+                    planetName.classList.add('jupiter-name');
+                } else if (objectId === 'saturn') {
+                    planetName.classList.add('saturn-name');
+                }
                 
                 // Update the planet image
                 const img = planetImage.querySelector('img');
