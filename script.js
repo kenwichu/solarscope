@@ -13,6 +13,31 @@ if (sunImage) {
 
 // Initialize the page
 document.addEventListener('DOMContentLoaded', function() {
+    // Entrance Animation Control
+    const entranceAnimation = document.getElementById('entrance-animation');
+    const skipBtn = document.getElementById('skip-animation');
+    
+    function endEntranceAnimation() {
+        if (entranceAnimation) {
+            entranceAnimation.classList.add('hidden');
+            setTimeout(() => {
+                entranceAnimation.style.display = 'none';
+            }, 500);
+        }
+    }
+    
+    // Skip button functionality
+    if (skipBtn) {
+        skipBtn.addEventListener('click', function() {
+            endEntranceAnimation();
+        });
+    }
+    
+    // Auto-end animation after 15 seconds
+    setTimeout(() => {
+        endEntranceAnimation();
+    }, 15000);
+    
     // Glorp expressions with full paths
     const glorpExpressions = [
         'images/glorp.png',
