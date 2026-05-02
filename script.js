@@ -47,11 +47,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Set up Glorp click handler
     const glorpImage = document.querySelector('.glorp-image');
+    console.log('Glorp image found:', glorpImage);
     if (glorpImage) {
         // Set initial image
         glorpImage.src = glorpExpressions[0];
+        console.log('Initial Glorp image set to:', glorpExpressions[0]);
         
         glorpImage.addEventListener('click', function() {
+            console.log('Glorp clicked! Current src:', this.src);
             // Add flying class to trigger the animation (can be clicked even while flying)
             this.classList.add('flying');
             
@@ -68,18 +71,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Find current index or default to 0
                 let currentIndex = 0;
+                console.log('Current file:', currentFile);
                 for (let i = 0; i < glorpExpressions.length; i++) {
                     if (glorpExpressions[i].includes(currentFile)) {
                         currentIndex = i;
                         break;
                     }
                 }
+                console.log('Current index:', currentIndex);
                 
                 // Get next image (with wrap-around)
                 const nextIndex = (currentIndex + 1) % glorpExpressions.length;
+                console.log('Next index:', nextIndex, 'Next image:', glorpExpressions[nextIndex]);
                 
                 // Add timestamp to prevent caching issues
                 this.src = glorpExpressions[nextIndex] + '?t=' + new Date().getTime();
+                console.log('New src set to:', this.src);
                 
                 // Fade back in with new image
                 this.style.opacity = '1';
